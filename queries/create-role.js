@@ -1,3 +1,4 @@
+const { escape } = require('sqlstring');
 const password = require('./password');
 const pool = require('../pool');
 
@@ -13,6 +14,6 @@ module.exports = async (id) => {
   const pw = await password(id);
 
   return pool.query(
-    `CREATE ROLE ${id} WITH LOGIN PASSWORD ${pw} CONNECTION LIMIT 2;`
+    `CREATE ROLE ${id} WITH LOGIN PASSWORD ${escape(pw)} CONNECTION LIMIT 2;`
   );
 };
