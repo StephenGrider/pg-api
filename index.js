@@ -10,7 +10,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? 'https://pg-sql.vercel.app'
+        : 'http://localhost:3000',
     credentials: true,
   })
 );
