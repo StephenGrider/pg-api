@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     id = createId(8);
     req.session.id = id;
   }
-  console.log(id);
+
   validateId(id);
 
   try {
