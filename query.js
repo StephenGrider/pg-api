@@ -37,10 +37,10 @@ const createClient = async (id) => {
 
   const client = new Client({
     user: id,
-    host: 'localhost',
+    host: process.env.PG_HOST,
     database: id,
     password: hashed,
-    port: 5432,
+    port: process.env.PG_PORT,
   });
 
   await client.connect();
