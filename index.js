@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use(
   cookieSession({
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     keys: [keys.cookieKey],
   })
 );

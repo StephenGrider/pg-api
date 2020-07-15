@@ -4,7 +4,7 @@ module.exports = {
       throw new Error('Invalid ID');
     }
   },
-  createId() {
+  createId(length = 8) {
     let result = '';
     const characters = 'abcdefghijklmnopqrstuvwxyz';
     const charactersLength = characters.length;
