@@ -1,7 +1,6 @@
-const { Client } = require('pg');
+const createClient = require('./queries/create-client');
 const { validateId } = require('./queries/id');
 const dbExists = require('./queries/db-exists');
-const password = require('./queries/password');
 const touchLogin = require('./queries/touch-login');
 
 module.exports = async (req, res) => {
@@ -30,20 +29,4 @@ module.exports = async (req, res) => {
   } finally {
     await client.end();
   }
-};
-
-const createClient = async (id) => {
-  const hashed = await password(id);
-
-  const client = new Client({
-    user: id,
-    host: process.env.PG_HOST,
-    database: id,
-    password: hashed,
-    port: process.env.PG_PORT,
-  });
-
-  await client.connect();
-
-  return client;
 };

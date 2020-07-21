@@ -28,6 +28,7 @@ app.use(
 
 app.post('/provision', require('./provision'));
 app.post('/query', require('./query'));
+app.post('/reset', require('./reset'));
 
 app.use((err, req, res, next) => {
   if (err) {
