@@ -13,24 +13,28 @@ module.exports = async (id) => {
 
   const client = await createClient(id);
 
-  await client.query(`CREATE TABLE cities (
-    name varchar(100),
-    lat float,
-    lng float,
-    country varchar(100),
-    iso3 char(3),
-    population float
-  );`);
+  try {
+    await client.query(`CREATE TABLE cities (
+      name varchar(100),
+      lat float,
+      lng float,
+      country varchar(100),
+      iso3 char(3),
+      population float
+    );`);
 
-  const values = escape(
-    cities.map(({ name, lat, lng, country, iso3, population }) => {
-      return [name, lat, lng, country, iso3, population];
-    })
-  ).replace(/\\/g, "'");
+    const values = escape(
+      cities.map(({ name, lat, lng, country, iso3, population }) => {
+        return [name, lat, lng, country, iso3, population];
+      })
+    ).replace(/\\/g, "'");
 
-  return client.query(
-    'INSERT INTO cities (name, lat, lng, country, iso3, population) VALUES ' +
-      values +
-      ';'
-  );
+    await client.query(
+      'INSERT INTO cities (name, lat, lng, country, iso3, population) VALUES ' +
+        values +
+        ';'
+    );
+  } finally {
+    await client.end();
+  }
 };
