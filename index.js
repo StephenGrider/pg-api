@@ -13,7 +13,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === 'production'
-        ? 'https://pg-sql.vercel.app'
+        ? 'https://pg-sql.com'
         : 'http://localhost:3000',
     credentials: true,
   })
