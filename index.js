@@ -23,7 +23,7 @@ app.use(
   cookieSession({
     secure: process.env.NODE_ENV === 'production',
     keys: [keys.cookieKey],
-    sameSite: 'none',
+    sameSite: 'Lax',
     httpOnly: true,
   })
 );

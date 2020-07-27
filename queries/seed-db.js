@@ -14,7 +14,24 @@ module.exports = async (id) => {
   const client = await createClient(id);
 
   try {
-    await client.query(`CREATE TABLE cities (
+    const {
+      rows: [{ exists }],
+    } = await client.query(`SELECT
+    EXISTS (
+      SELECT
+      FROM
+        information_schema.tables
+      WHERE
+        table_name = 'cities'
+    );`);
+
+    if (exists) {
+      await client.end();
+      return;
+    }
+
+    await client.query(`CREATE TABLE IF NOT EXISTS cities (
+      id SERIAL PRIMARY KEY,
       name varchar(100),
       lat float,
       lng float,
