@@ -13,8 +13,8 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === 'production'
-        ? 'https://pg-sql.com'
-        : 'http://localhost:3000',
+        ? ['https://pg-sql.com', 'https://notes.pg-sql.com']
+        : ['http://localhost:3000'],
     credentials: true,
   })
 );
