@@ -19,11 +19,21 @@ module.exports = async (req, res) => {
 
     if (Array.isArray(result)) {
       res.send(
-        result.map(({ rows, fields, command }) => ({ command, rows, fields }))
+        result.map(({ rows, fields, command, rowCount }) => ({
+          command,
+          rows,
+          fields,
+          rowCount,
+        }))
       );
     } else {
       res.send([
-        { command: result.command, rows: result.rows, fields: result.fields },
+        {
+          command: result.command,
+          rows: result.rows,
+          fields: result.fields,
+          rowCount: result.rowCount,
+        },
       ]);
     }
   } finally {
