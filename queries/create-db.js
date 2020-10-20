@@ -9,8 +9,11 @@ module.exports = async (id) => {
     return;
   }
 
-  return pool.query(`
+  await pool.query(`
     CREATE DATABASE ${id} OWNER ${id};
+  `);
+
+  return pool.query(`
     ALTER DATABASE ${id} SET statement_timeout = '1s';
   `);
 };
