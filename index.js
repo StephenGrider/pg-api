@@ -25,6 +25,7 @@ app.use(
     keys: [keys.cookieKey],
     sameSite: 'Lax',
     httpOnly: true,
+    domain: 'pg-sql.com',
   })
 );
 
